@@ -1,0 +1,22 @@
+<div class="workspace" (dblclick)="onWorkspaceDblClick($event)">
+  <pan-zoom [config]="panZoomConfig" class="boundary">
+    <div
+      id="item-container"
+      style="position: relative; transform-origin: 0 0"
+      [style.transform]="'scale(' + scaleValue + ')'"
+    >
+      <div
+        #cmdItem
+        [id]="cmdItem.key"
+        *ngFor="let cmdItem of cmdItems | keyvalue; let i = index"
+        class="node-item"
+        cdkDrag
+        cdkDragBoundary=".boundary"
+        (cdkDragStarted)="onDragStarted($event, cmdItem.key)"
+        (cdkDragMoved)="onDragMoved($event, cmdItem.key)"
+        (cdkDragEnded)="onDragEnded($event, cmdItem.key)"
+        [cdkDragFreeDragPosition]="cmdItem.value.initialPosition"
+      ></div>
+    </div>
+  </pan-zoom>
+</div>
